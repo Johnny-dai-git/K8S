@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 600" role="img" aria-labelledby="title desc" font-family="'Noto Sans', 'DejaVu Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+  <title id="title">Kubernetes Probes Timeline</title>
+  <desc id="desc">A timeline showing how startupProbe, readinessProbe, and livenessProbe operate over the lifetime of a pod, marking key events at t=0, t=10, t=15, t=120, and t=300 seconds.</desc>
+
+  <!-- Reusable arrow glyph (drawn as SVG path so it never depends on the system font) -->
+  <defs>
+    <symbol id="arrow" viewBox="0 0 14 8">
+      <path d="M0 4 L11 4 M7 1 L11 4 L7 7" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="restart" viewBox="0 0 14 14">
+      <path d="M11.5 5.5a5 5 0 1 0 0.4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M11.5 1.5 L11.5 5.5 L7.5 5.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <!-- check mark (drawn as path so it always renders) -->
+    <symbol id="check" viewBox="0 0 14 14">
+      <path d="M2.5 7.5 L6 11 L11.5 4" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <!-- cross / x (drawn as path) -->
+    <symbol id="cross" viewBox="0 0 14 14">
+      <path d="M3.5 3.5 L10.5 10.5 M10.5 3.5 L3.5 10.5" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+
+  <!-- Background -->
+  <rect width="980" height="600" fill="#ffffff"/>
+
+  <!-- ====== TITLE ====== -->
+  <text x="490" y="42" text-anchor="middle" font-size="22" font-weight="700" fill="#111">Kubernetes Probes Timeline</text>
+  <text x="490" y="66" text-anchor="middle" font-size="14" fill="#6b6b6b">Three probes solve three independent problems — starting up · serving · staying alive</text>
+
+  <!-- ====== TIME AXIS ====== -->
+  <line x1="200" y1="500" x2="900" y2="500" stroke="#222" stroke-width="1.5"/>
+  <polygon points="900,500 890,495 890,505" fill="#222"/>
+  <text x="908" y="504" font-size="12" fill="#6b6b6b">t (s)</text>
+
+  <!-- Time tick marks -->
+  <g font-size="12" fill="#444" font-weight="600">
+    <line x1="200" y1="495" x2="200" y2="510" stroke="#222" stroke-width="1.5"/>
+    <text x="200" y="528" text-anchor="middle">t=0</text>
+
+    <line x1="290" y1="495" x2="290" y2="510" stroke="#222" stroke-width="1.5"/>
+    <text x="290" y="528" text-anchor="middle">t=10</text>
+
+    <line x1="350" y1="495" x2="350" y2="510" stroke="#222" stroke-width="1.5"/>
+    <text x="350" y="528" text-anchor="middle">t=15</text>
+
+    <line x1="510" y1="495" x2="510" y2="510" stroke="#222" stroke-width="1.5"/>
+    <text x="510" y="528" text-anchor="middle">t=60</text>
+
+    <line x1="650" y1="495" x2="650" y2="510" stroke="#222" stroke-width="1.5"/>
+    <text x="650" y="528" text-anchor="middle">t=120</text>
+
+    <line x1="850" y1="495" x2="850" y2="510" stroke="#222" stroke-width="1.5"/>
+    <text x="850" y="528" text-anchor="middle">t=300</text>
+  </g>
+
+  <!-- Vertical guidelines -->
+  <g stroke="#e6e6e6" stroke-width="1" stroke-dasharray="2 4">
+    <line x1="200" y1="100" x2="200" y2="495"/>
+    <line x1="290" y1="100" x2="290" y2="495"/>
+    <line x1="350" y1="100" x2="350" y2="495"/>
+    <line x1="650" y1="100" x2="650" y2="495"/>
+    <line x1="850" y1="100" x2="850" y2="495"/>
+  </g>
+
+  <!-- ====== SWIM LANE LABELS ====== -->
+  <g font-size="13" fill="#111" font-weight="700">
+    <text x="20" y="148">startupProbe</text>
+    <text x="20" y="258">readinessProbe</text>
+    <text x="20" y="368">livenessProbe</text>
+  </g>
+  <g font-size="11" fill="#6b6b6b" font-style="italic">
+    <text x="20" y="166">"is it booted?"</text>
+    <text x="20" y="276">"can it serve?"</text>
+    <text x="20" y="386">"is it stuck?"</text>
+  </g>
+
+  <!-- Lane separators -->
+  <g stroke="#f0f0f0" stroke-width="1">
+    <line x1="200" y1="200" x2="900" y2="200"/>
+    <line x1="200" y1="310" x2="900" y2="310"/>
+    <line x1="200" y1="420" x2="900" y2="420"/>
+  </g>
+
+  <!-- ====== STARTUP PROBE LANE ====== -->
+  <rect x="200" y="128" width="90" height="32" rx="4" fill="#e8f0fe" stroke="#3a7afe" stroke-width="1.5"/>
+  <text x="245" y="148" text-anchor="middle" font-size="12" font-weight="600" fill="#1a4ed8">running</text>
+
+  <!-- pass marker -->
+  <circle cx="290" cy="144" r="9" fill="#1a8917" stroke="#fff" stroke-width="2"/>
+  <g color="#fff"><use href="#check" x="283" y="137" width="14" height="14"/></g>
+
+  <text x="308" y="138" font-size="12" fill="#111" font-weight="600">passes</text>
+  <g color="#6b6b6b">
+    <use href="#arrow" x="308" y="148" width="14" height="8"/>
+  </g>
+  <text x="328" y="155" font-size="11" fill="#6b6b6b">hands off to readiness &amp; liveness</text>
+
+  <!-- inactive tail -->
+  <line x1="299" y1="144" x2="900" y2="144" stroke="#ddd" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- ====== READINESS PROBE LANE ====== -->
+  <rect x="200" y="238" width="150" height="32" rx="4" fill="#f5f5f5" stroke="#bbb" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="275" y="258" text-anchor="middle" font-size="11" fill="#6b6b6b">gated by startup</text>
+
+  <rect x="350" y="238" width="500" height="32" rx="4" fill="#e6f4ea" stroke="#1a8917" stroke-width="1.5"/>
+  <text x="600" y="258" text-anchor="middle" font-size="12" font-weight="600" fill="#0f5d0d">in Service endpoints — serving traffic</text>
+
+  <!-- readiness pass at t=15 -->
+  <circle cx="350" cy="254" r="9" fill="#1a8917" stroke="#fff" stroke-width="2"/>
+  <g color="#fff"><use href="#check" x="343" y="247" width="14" height="14"/></g>
+
+  <line x1="350" y1="238" x2="350" y2="218" stroke="#1a8917" stroke-width="1"/>
+  <text x="358" y="214" font-size="11" font-weight="600" fill="#0f5d0d">readiness passes</text>
+  <g color="#0f5d0d">
+    <use href="#arrow" x="358" y="221" width="14" height="8"/>
+  </g>
+  <text x="378" y="228" font-size="11" fill="#6b6b6b">joins Service</text>
+
+  <!-- readiness fail at t=300 -->
+  <circle cx="850" cy="254" r="9" fill="#c0392b" stroke="#fff" stroke-width="2"/>
+  <g color="#fff"><use href="#cross" x="843" y="247" width="14" height="14"/></g>
+
+  <line x1="850" y1="238" x2="850" y2="218" stroke="#c0392b" stroke-width="1"/>
+  <text x="844" y="214" text-anchor="end" font-size="11" font-weight="600" fill="#a82414">readiness fails</text>
+  <text x="844" y="228" text-anchor="end" font-size="11" fill="#6b6b6b">drop from endpoints</text>
+
+  <!-- ====== LIVENESS PROBE LANE ====== -->
+  <rect x="200" y="348" width="150" height="32" rx="4" fill="#f5f5f5" stroke="#bbb" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="275" y="368" text-anchor="middle" font-size="11" fill="#6b6b6b">gated by startup</text>
+
+  <rect x="350" y="348" width="300" height="32" rx="4" fill="#fdecea" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="500" y="368" text-anchor="middle" font-size="12" font-weight="600" fill="#a44a09">monitoring — is the process stuck?</text>
+
+  <!-- liveness fail at t=120 -->
+  <circle cx="650" cy="364" r="9" fill="#c0392b" stroke="#fff" stroke-width="2"/>
+  <g color="#fff"><use href="#cross" x="643" y="357" width="14" height="14"/></g>
+
+  <line x1="650" y1="380" x2="650" y2="402" stroke="#c0392b" stroke-width="1"/>
+  <text x="650" y="418" text-anchor="middle" font-size="11" font-weight="600" fill="#a82414">liveness fails</text>
+  <text x="650" y="432" text-anchor="middle" font-size="11" fill="#6b6b6b">kubelet restarts container</text>
+
+  <!-- restart icon after t=120 -->
+  <g color="#a44a09" transform="translate(665, 358)">
+    <use href="#restart" width="11" height="11"/>
+  </g>
+  <text x="680" y="368" font-size="11" fill="#a44a09" font-style="italic">restart</text>
+
+  <!-- ====== LEGEND ====== -->
+  <g transform="translate(120, 562)">
+    <rect x="0" y="-10" width="14" height="14" rx="2" fill="#e8f0fe" stroke="#3a7afe" stroke-width="1.2"/>
+    <text x="20" y="2" font-size="12" fill="#333"><tspan font-weight="600">startupProbe</tspan> · boot gate</text>
+
+    <rect x="170" y="-10" width="14" height="14" rx="2" fill="#e6f4ea" stroke="#1a8917" stroke-width="1.2"/>
+    <text x="190" y="2" font-size="12" fill="#333"><tspan font-weight="600">readinessProbe</tspan> · Service traffic</text>
+
+    <rect x="380" y="-10" width="14" height="14" rx="2" fill="#fdecea" stroke="#e67e22" stroke-width="1.2"/>
+    <text x="400" y="2" font-size="12" fill="#333"><tspan font-weight="600">livenessProbe</tspan> · restarts</text>
+
+    <circle cx="555" cy="-3" r="7" fill="#1a8917"/>
+    <g color="#fff"><use href="#check" x="548" y="-10" width="14" height="14"/></g>
+    <text x="567" y="2" font-size="12" fill="#333">pass</text>
+
+    <circle cx="625" cy="-3" r="7" fill="#c0392b"/>
+    <g color="#fff"><use href="#cross" x="618" y="-10" width="14" height="14"/></g>
+    <text x="637" y="2" font-size="12" fill="#333">fail</text>
+  </g>
+
+</svg>
